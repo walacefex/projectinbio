@@ -1,5 +1,5 @@
 "use server";
-import { auth, signIn, signOut } from "@/app/components/lib/auth";
+import { auth, signIn, signOut } from "@/app/lib/auth";
 export async function manageAuth() {
   const session = await auth();
   if (!session) {

@@ -1,5 +1,5 @@
-import { TRIAL_DAYS } from "@/app/components/lib/config";
 import Button from "@/app/components/ui/Button";
+import { TRIAL_DAYS } from "@/app/lib/config";
 export default function Pricing() {
   return (
     <div className="my-[150px] flex flex-col items-center gap-14">

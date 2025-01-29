@@ -1,6 +1,6 @@
 import { manageAuth } from "@/app/actions/manage-auth";
 import Image from "next/image";
-import { auth } from "../lib/auth";
+import { auth } from "../../lib/auth";
 import Button from "../ui/Button";
 
 export default async function Header() {
