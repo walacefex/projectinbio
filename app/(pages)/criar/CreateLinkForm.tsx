@@ -5,11 +5,12 @@ import { verifyLink } from "@/app/actions/verify-link";
 import Button from "@/app/components/ui/Button";
 import TextInput from "@/app/components/ui/TextInput";
 import { sanitizeLink } from "@/app/lib/utils";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function CreateLinkForm() {
   const router = useRouter();
+
   const [link, setLink] = useState("");
   const [error, setError] = useState("");
 
@@ -20,15 +21,21 @@ export default function CreateLinkForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (link.length === 0) return setError("Por favor insira um link");
 
+    // Quando o usuario nao escreve um link
+    if (link.length === 0) return setError("Escolha um link primeiro :)");
+
+    // Quando o usuario escolhe um link ja existente
     const isLinkTaken = await verifyLink(link);
-    if (isLinkTaken) return setError("Desculpe, esse link já está em uso");
 
+    if (isLinkTaken) return setError("Desculpe, esse link já está em uso.");
+
+    // Criar o perfil
     const isLinkCreated = await createLink(link);
-    if (!isLinkCreated) {
-      return setError("Desculpe, houve um erro ao criar o link");
-    }
+
+    if (!isLinkCreated)
+      return setError("Erro ao criar o perfil. Tente novamente.");
+
     router.push(`/${link}`);
   }
 
