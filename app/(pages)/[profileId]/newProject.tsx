@@ -1,14 +1,19 @@
 "use client";
 
 import { createProject } from "@/app/actions/create-project";
-import Button from "@/app/components/ui/Button";
-import Modal from "@/app/components/ui/Modal";
-import TextArea from "@/app/components/ui/TextArea";
-import TextInput from "@/app/components/ui/TextInput";
-import { compressFiles } from "@/app/lib/utils";
 import { ArrowUpFromLine, Plus } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { startTransition, useState } from "react";
+import { startTransition, useState } from "react";
+import Button from "../../components/ui/Button";
+import Modal from "../../components/ui/Modal";
+import TextArea from "../../components/ui/TextArea";
+import TextInput from "../../components/ui/TextInput";
+import {
+  compressFiles,
+  handleImageInput,
+  triggerImageInput,
+} from "../../lib/utils";
 
 export default function NewProject({ profileId }: { profileId: string }) {
   const router = useRouter();
@@ -18,24 +23,12 @@ export default function NewProject({ profileId }: { profileId: string }) {
   const [projectDescription, setProjectDescription] = useState("");
   const [projectUrl, setProjectUrl] = useState("");
   const [projectImage, setProjectImage] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isCreatingProject, setIsCreatingProject] = useState(false);
 
   const handleOpenModal = () => {
     setIsOpen(true);
   };
-
-  function triggerImageInput(id: string) {
-    document.getElementById(id)?.click();
-  }
-
-  function handleImageInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0] ?? null;
-    if (file) {
-      const imageURL = URL.createObjectURL(file);
-      return imageURL;
-    }
-    return null;
-  }
 
   async function handleCreateProject() {
     setIsCreatingProject(true);
@@ -84,7 +77,9 @@ export default function NewProject({ profileId }: { profileId: string }) {
             <div className="flex flex-col items-center gap-3 text-xs">
               <div className="w-[100px] h-[100px] rounded-xl bg-background-tertiary overflow-hidden">
                 {projectImage ? (
-                  <img
+                  <Image
+                    width={96}
+                    height={96}
                     src={projectImage}
                     alt="Project Image"
                     className="object-cover object-center"

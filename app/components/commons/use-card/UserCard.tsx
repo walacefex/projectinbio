@@ -20,7 +20,7 @@ export default function UserCard() {
       <div className="flex flex-col gap-2 w-full">
         <div className="flex items-center gap-2">
           <h3 className="text-3xl font-bold min-w-0 overflow-hidden">
-            André Dev
+            Walace Felix
           </h3>
         </div>
         <p className="opacity-40">Eu faço produtos para a Internet</p>

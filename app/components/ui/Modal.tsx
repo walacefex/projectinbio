@@ -1,7 +1,7 @@
 "use client";
 
-import useOnClickOutside from "@/app/hooks/useOnClickOutside";
 import { useRef } from "react";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 export default function Modal({
   children,
@@ -14,7 +14,7 @@ export default function Modal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useOnClickOutside(ref as React.RefObject<HTMLDivElement>, () => {
+  useOnClickOutside(ref, () => {
     setIsOpen(false);
   });
 
