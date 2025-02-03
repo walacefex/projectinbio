@@ -1,6 +1,6 @@
 import ProjectCard from "@/app/components/commons/ProjectCard";
 import TotalVisits from "@/app/components/commons/TotalVisits";
-import UserCard from "@/app/components/commons/UserCard";
+import UserCard from "@/app/components/commons/use-card/UserCard";
 import { auth } from "@/app/lib/auth";
 import { getDownloadURLFromPath } from "@/app/lib/firebase";
 import {
