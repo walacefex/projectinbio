@@ -1,9 +1,15 @@
+import { ProfileData } from "@/app/server/getProfileData";
 import { Github, Instagram, Linkedin, Plus, Twitter } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../../ui/Button";
 import EditSocialLinks from "./EditSocialLinks";
 
-export default function UserCard() {
+export default function UserCard({
+  profileData,
+}: {
+  profileData?: ProfileData;
+}) {
   const icons = [Github, Instagram, Linkedin, Twitter];
 
   return (
@@ -29,13 +35,46 @@ export default function UserCard() {
         <span className="uppercase text-xs font-medium">Links</span>
 
         <div className="flex gap-3">
-          {icons.map((Icon, index) => (
-            <button
-              key={index}
+          {profileData?.socialMedias?.github && (
+            <Link
+              href={profileData?.socialMedias?.github}
+              target="_blank"
               className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
-              <Icon />
-            </button>
-          ))}
+              <Github />
+            </Link>
+          )}
+          {profileData?.socialMedias?.instagram && (
+            <Link
+              href={profileData?.socialMedias?.instagram}
+              target="_blank"
+              className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
+              <Instagram />
+            </Link>
+          )}
+          {profileData?.socialMedias?.linkedin && (
+            <Link
+              href={profileData?.socialMedias?.linkedin}
+              target="_blank"
+              className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
+              <Linkedin />
+            </Link>
+          )}
+          {profileData?.socialMedias?.twitter && (
+            <Link
+              href={profileData?.socialMedias?.twitter}
+              target="_blank"
+              className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
+              <Twitter />
+            </Link>
+          )}
+          {!profileData &&
+            icons.map((Icon, index) => (
+              <button
+                key={index}
+                className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
+                <Icon />
+              </button>
+            ))}
           <EditSocialLinks />
         </div>
       </div>
